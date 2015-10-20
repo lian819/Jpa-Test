@@ -1,8 +1,11 @@
 package jpa.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,14 +19,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "T_PERSON")
-@Inheritance(strategy = InheritanceType.JOINED)
 //@DiscriminatorColumn(name = "Person_Type", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="Person_Type", discriminatorType=DiscriminatorType.INTEGER)
 public class Person {
 	private Long id;
 	private String firstName;
 	private String lastName;
 	private IdCard idCard;
-	private List<Phone> phones;
+	private List<Phone> phones = new ArrayList<Phone>();
 
 	@Id
 	@GeneratedValue
